@@ -12,11 +12,10 @@ class Config(object):
             'data':{
                 'training_set': '../data/BoP2017-DBQA.train.txt',
                 'dev_set': '../data/BoP2017-DBQA.dev.txt',
-                'training_vec_result': '../data/training_word_dict_result.txt',
-        },
+            },
 
             'embedding':{
-                'sgns_wiki':'../embedding/sgns.wiki.word'
+                'sgns_wiki':'../model/sgns.wiki.word',
             },
 
             'training_rule':{
@@ -28,18 +27,19 @@ class Config(object):
                 "conv_layer_num": 3,
                 "epoches": 1,
                 "batch_size": 128,
-                "model_path": '../model/training_result_model',
-                'word_dict_path': '../data/training_word_dict_result.txt'
-
             },
 
             'testing_rule':{
                 "max_len": 64,
                 "batch_size": 128,
-                "model_path": '../model/training_result_model',
-                'word_dict_path': '../data/training_word_dict_result.txt'
 
+            },
+            'result':{
+                "model_path": '../model/training_result_model.h5',
+                'word_dict_path': '../data/training_word_dict_result.txt'
             }
+
         }
+
     def get(self, section, name):
         return self.config_dict[section][name]

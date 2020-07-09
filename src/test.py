@@ -9,9 +9,9 @@ Created on 2020-05-28 17:48
 import sys
 sys.path.append("..")
 
-import  keras
+import  tensorflow.keras as keras
 import numpy
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 from utils import preprocess
 from config import Config
 
@@ -22,12 +22,12 @@ class test(object):
     def main(self):
         max_len = self.config.get('testing_rule', 'max_len')
         batch_size = self.config.get('testing_rule', 'batch_size')
-        model_path = self.config.get('testing_rule', 'model_path')
         dev_path = self.config.get('data', 'dev_set')
+        model_path = self.config.get('result', 'model_path')
+        dict_path = self.config.get('result', 'word_dict_path')
 
-
-        # 获取训练的词向量
-        preprocess.load_word_dict()
+        # 加载训练后的词向量
+        preprocess.load_word_dict(dict_path)
         # 获取开发集数据
         dev_q, dev_a, dev_tag = preprocess.get_dev_data(dev_path)
 
@@ -73,3 +73,6 @@ class test(object):
                     score += 1. / orders[k]
                     scores.write(str(int(orders[k])) + "\t" + str(score / cnt) + '\n')
         scores.close()
+
+test = test()
+test.main()
